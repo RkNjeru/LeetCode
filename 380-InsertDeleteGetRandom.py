@@ -14,15 +14,19 @@ class RandomizedSet(object):
 
     def insert(self, val):
         """
-        Inserts a value to the set. Returns true if the set did not already contain the
-        specified element.
+        Inserts a value to the set. Returns true if the set did not already contain
+        the specified element.
         :type val: int
         :rtype: bool
         """
         if((val in self.myDict) != True):
             self.myArray.append(val)
+            ## add value to back of array
             i = len(self.myArray) - 1
+            ## position of value in array
             self.myDict[val] = i
+            """for x in range(0, len(self.myArray)):
+                print (self.myArray[x])j"""
             return True
         else:
             return False
@@ -37,15 +41,28 @@ class RandomizedSet(object):
         """
         if(val in self.myDict):
             index = self.myDict[val] ## find index of value going to delete
-            self.myArray[index] = self.myArray[len(self.myArray)-1] ## move last entry into value position
-            del self.myDict[val] ## delete value from dictionary
-            self.myDict[self.myArray[index]] = index ## update dictionary value of old last entry
-            ## to reflect new index in the array
-            self.myArray = self.myArray[:-1]
-            return True
+            if(len(self.myArray) > 1):
+                self.myArray[index] = self.myArray[len(self.myArray)-1]
+                ##move lastValue to replace val that is going to be deleted
+                del self.myDict[val] ##test independently for behavior
+                ## remove val from Dictionary
+                self.myArray = self.myArray[:-1] ##test independently for behavior
+                ## reduce array size by 1
+                ##print ("the index i'm trying to remove: ", index)
+                if (index < len(self.myArray)):
+                    self.myDict[self.myArray[index]] = index
+                ## update value of old lastValue to its new position in the array
+                
+                
+            elif(len(self.myArray) == 1):
+                del self.myDict[val]
+                self.myArray = self.myArray[:-1]                
+                                
         else:
             return False
-        
+        """for x in range(0, len(self.myArray)):
+                print (self.myArray[x])"""
+        return True
 
     def getRandom(self):
         """
@@ -53,7 +70,10 @@ class RandomizedSet(object):
         :rtype: int
         """
 
-        return self.myArray[random.randint(0, (len(self.myArray)-1))]
+        if (len(self.myArray) != 0 ):
+            return self.myArray[random.randint(0, (len(self.myArray)-1))]
+        else:
+            return -1
         
         
 
