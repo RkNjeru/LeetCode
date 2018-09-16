@@ -1,6 +1,4 @@
-## J = "aA", S = "aAAbbbb"
-J = input('Enter string J: ')
-S = input('Enter string s: ')
+## https://leetcode.com/problems/jewels-and-stones/description/
 
 count = 0
 for x in range(0, len(J)):
