@@ -1,4 +1,5 @@
 import random
+    
 class RandomizedSet(object):
 
     def __init__(self):
@@ -8,10 +9,6 @@ class RandomizedSet(object):
         self.myDict = dict()
         self.myArray = []
         
-        
-        
-        
-
     def insert(self, val):
         """
         Inserts a value to the set. Returns true if the set did not already contain
@@ -75,11 +72,40 @@ class RandomizedSet(object):
         else:
             return -1
         
-        
-
-
 # Your RandomizedSet object will be instantiated and called as such:
 # obj = RandomizedSet()
 # param_1 = obj.insert(val)
 # param_2 = obj.remove(val)
 # param_3 = obj.getRandom()
+
+######### This code is used to run the script outside of LeetCode #########
+
+def main():
+    obj = RandomizedSet()
+    print ("Enter input as follows: ")
+    print ("'i 1' ----- to insert a 1")
+    print ("'r' ---- to get a random number")
+    print ("'rm 1' ---- to remove 1")
+    print ("'done' ---- to exit ")
+    userInput = ""
+
+    while (True):
+        userInput = input()
+        if (userInput[0] == "i"):
+            # do some stuff
+            continue
+        elif (userInput[0] == "r"):
+            # do some stuff
+            continue
+        elif (userInput[0:1] == "rm"):
+            # do some stuff
+            continue
+        elif (userInput == "done"):
+            break
+        else:
+            print ("input was not valid. please try again")
+            continue
+
+main()
+
+################ End of main #################################
