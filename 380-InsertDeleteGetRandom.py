@@ -84,7 +84,7 @@ def main():
     obj = RandomizedSet()
     print ("Enter input as follows: ")
     print ("'i 1' ----- to insert a 1")
-    print ("'r' ---- to get a random number")
+    print ("'ran' ---- to get a random number")
     print ("'rm 1' ---- to remove 1")
     print ("'done' ---- to exit ")
     userInput = ""
@@ -92,13 +92,16 @@ def main():
     while (True):
         userInput = input()
         if (userInput[0] == "i"):
-            # do some stuff
+            response = obj.insert(userInput[2:(len(userInput))])
+            print (response)
             continue
-        elif (userInput[0] == "r"):
-            # do some stuff
+        elif (userInput == "ran"):
+            response = obj.getRandom()
+            print (response)
             continue
-        elif (userInput[0:1] == "rm"):
-            # do some stuff
+        elif (userInput[0:2] == "rm"):
+            response = obj.remove(userInput[3:(len(userInput))])
+            print (response)
             continue
         elif (userInput == "done"):
             break
