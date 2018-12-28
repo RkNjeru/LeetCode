@@ -13,10 +13,10 @@
 
 
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode:
+     def __init__(self, x):
+         self.val = x
+         self.next = None
 
 class Solution:
     def addTwoNumbers(self, l1, l2):
@@ -40,11 +40,21 @@ class Solution:
         num1 = int(n1)
         num2 = int(n2)
 
-        sum = num1 + num2
+        sumStr = str(num1 + num2)
+        sumNode = ListNode("")
+        #print(len(sumStr))
+        returnList = []
+
+        for y in range((len(sumStr) - 1), -1, -1):
+            print("here")
+            #sumNode.next = sumNode
+            #sumNode.val = sumStr[y]
+            returnList.append(int(sumStr[y]))
+
+        
+        return (returnList)
         
         
-        string1 = str(num1)
-        string2 = str(num2)
         
         
 
