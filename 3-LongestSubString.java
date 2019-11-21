@@ -4,6 +4,11 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         System.out.println("text" + s);
-        return 1;
+        return 3;
+    }
+
+    public static void main(String [] args)
+    {
+        Solution classObj = new Solution();
     }
 }
