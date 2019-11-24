@@ -3,6 +3,22 @@
 
 class Solution {
     public int lengthOfLongestSubstring(String s) {
+        int longestLen = 0;
+        int curLen = 0;
+
+        // loop through string
+        for(int i = 0; i < s.length() - 1; i++)
+        {
+            char curVal = s.charAt(i);
+            char nextVal = s.charAt(i + 1);
+            int jIndex = i;
+
+            while (jIndex < s.length() - 1)
+            {
+                
+            }
+        }
+
         System.out.println("text" + s);
         return 3;
     }
@@ -10,5 +26,6 @@ class Solution {
     public static void main(String [] args)
     {
         Solution classObj = new Solution();
+        classObj.lengthOfLongestSubstring("abcabcbb");
     }
 }
