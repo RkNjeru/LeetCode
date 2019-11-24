@@ -15,12 +15,29 @@ class Solution {
 
             while (jIndex < s.length() - 1)
             {
-                
+                if(curVal != nextVal)
+                {
+                    curVal = s.charAt(jIndex + 1);
+                    nextVal = s.charAt(jIndex + 2);
+                    jIndex++;
+                    curLen++;
+                }
+                else
+                {
+                    jIndex++;
+                    continue;
+                }
+
+            }
+
+            if( curLen > longestLen)
+            {
+                longestLen = curLen;
             }
         }
 
         System.out.println("text" + s);
-        return 3;
+        return longestLen;
     }
 
     public static void main(String [] args)
