@@ -1,5 +1,6 @@
 // https://leetcode.com/problems/longest-substring-without-repeating-characters/
 // Given a string, find the length of the longest substring without repeating characters
+// longest string with unique characters
 
 class Solution {
     public int lengthOfLongestSubstring(String s) {
@@ -25,7 +26,7 @@ class Solution {
                 else
                 {
                     jIndex++;
-                    continue;
+                    break;
                 }
 
             }
