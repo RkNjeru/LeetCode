@@ -1,49 +1,58 @@
 // https://leetcode.com/problems/longest-substring-without-repeating-characters/
 // Given a string, find the length of the longest substring without repeating characters
-// longest string with unique characters
+// ie. longest string with unique characters
 
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         int longestLen = 0;
-        int curLen = 0;
-
-        // loop through string
-        for(int i = 0; i < s.length() - 1; i++)
+        if(s.length() >= 1)
         {
-            char curVal = s.charAt(i);
-            char nextVal = s.charAt(i + 1);
-            int jIndex = i;
+            longestLen = 1;
+        }
 
-            while (jIndex < s.length() - 1)
+        for(int i = 0; i <= s.length() - 2; i++)
+        {
+            int jIndex = i + 1;
+            String curStr = s.substring(i, jIndex);
+            String nextChar = s.substring(jIndex, jIndex + 1);
+            int uniqueCounter = 1;
+
+            while(i <= s.length() - 2)
             {
-                if(curVal != nextVal)
+
+                if(!curStr.contains(nextChar))
                 {
-                    curVal = s.charAt(jIndex + 1);
-                    nextVal = s.charAt(jIndex + 2);
                     jIndex++;
-                    curLen++;
+                    curStr = s.substring(i, jIndex);
+                    uniqueCounter++;
+                    if(jIndex < s.length())
+                    {
+                        nextChar = s.substring(jIndex, jIndex + 1);
+                    }
+                    else
+                    {
+                        break;
+                    }   
                 }
                 else
                 {
-                    jIndex++;
                     break;
                 }
-
             }
 
-            if( curLen > longestLen)
+            if(uniqueCounter > longestLen)
             {
-                longestLen = curLen;
+                longestLen = uniqueCounter;
             }
         }
 
-        System.out.println("text" + s);
         return longestLen;
     }
 
     public static void main(String [] args)
     {
         Solution classObj = new Solution();
-        classObj.lengthOfLongestSubstring("abcabcbb");
+        int ans = classObj.lengthOfLongestSubstring("abcabcbb");
+        System.out.println("length of longest substring: " + ans);
     }
 }
