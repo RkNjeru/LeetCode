@@ -3,9 +3,19 @@
 
 class Solution {
     public String longestPalindrome(String s) {
+        
+        //traverse through the string with indexing at each letter
+        for(int i = 0; i < s.length(); i++)
+        {
+            for(int j = i +1; j <= s.length(); j++)
+            {
+                String currentWord = s.substring(i, j);
+            }
+        }
+        
         return "text";
     }
-    
+
     public boolean isPalindrome(String aWord)
     {
         return false;
