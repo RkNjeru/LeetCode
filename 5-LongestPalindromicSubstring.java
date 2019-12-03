@@ -5,4 +5,17 @@ class Solution {
     public String longestPalindrome(String s) {
         return "text";
     }
+    
+    public boolean isPalindrome(String aWord)
+    {
+        return false;
+    }
+
+    public static void main(String [] args)
+    {
+        Solution solObj = new Solution();
+        String word = "babad";
+        String ans = solObj.longestPalindrome(word);
+        System.out.println("Longest Palindrome in: " + word + " is: " + ans);
+    }
 }
