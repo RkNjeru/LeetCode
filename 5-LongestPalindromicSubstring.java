@@ -1,8 +1,17 @@
+// solution accepted -- done
+// time exceeds error
+
 // https://leetcode.com/problems/longest-palindromic-substring/
-// Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000
+// Given a string s, find the longest palindromic substring in s. You may assume that the 
+// maximum length of s is 1000
 
 class OtherSolution {
     public String longestPalindrome(String s) {
+        if(s.length() == 0){
+            return "";
+        }
+
+        String curMaxPalindrome = s.substring(0,1);
         
         //traverse through the string with indexing at each letter
         for(int i = 0; i < s.length(); i++)
@@ -10,17 +19,17 @@ class OtherSolution {
             for(int j = i +1; j <= s.length(); j++)
             {
                 String currentWord = s.substring(i, j);
+                if(isPalindrome(currentWord) & currentWord.length() > curMaxPalindrome.length()){
+                    curMaxPalindrome = currentWord;
+                }
             }
         }
         
-        return "text";
+        return curMaxPalindrome;
     }
 
     public boolean isPalindrome(String aWord)
     {
-        // start with first and last chars
-        // len of 'chars' = 5. should stop at backIndex = 3 (len/2 + 1)
-        // len of 'last' = 4. should stop at backIndex = 2 (len/2)
         int strLen = aWord.length();
         boolean ans = false;
         
@@ -50,14 +59,9 @@ class OtherSolution {
     public static void main(String [] args)
     {
         OtherSolution solObj = new OtherSolution();
-        String word = "tattarrattat";
+        String word = "";
         
-        // test isPalindrome
-        Boolean ans = solObj.isPalindrome(word);
-        String val = (ans) ? " is a palindrome" : " is not a palindrome";
-        System.out.println(word + val);
-        
-        // String ans = solObj.longestPalindrome(word);
-        // System.out.println("Longest Palindrome in: " + word + " is: " + ans);
+        String ans = solObj.longestPalindrome(word);
+        System.out.println(ans + " is the longest Palindrome in " + word);
     }
 }
