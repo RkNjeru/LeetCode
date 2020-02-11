@@ -1,32 +1,33 @@
 // valid implementation
 // time exceeds error
-// 93 / 103 test cases passed
+// 59 / 103 test cases passed
 
 // https://leetcode.com/problems/longest-palindromic-substring/
 // Given a string s, find the longest palindromic substring in s. You may assume that the 
 // maximum length of s is 1000
 
-class OtherSolution {
+class OtherSolutionG {
     public String longestPalindrome(String s) {
         if(s.length() == 0){
             return "";
         }
 
         String curMaxPalindrome = s.substring(0,1);
-        
-        //traverse through the string with indexing at each letter
-        for(int i = 0; i < s.length(); i++)
-        {
-            for(int j = i +1; j <= s.length(); j++)
-            {
-                String currentWord = s.substring(i, j);
-                if(isPalindrome(currentWord) & currentWord.length() > curMaxPalindrome.length()){
-                    curMaxPalindrome = currentWord;
+        StringBuilder sb = new StringBuilder(s);
+
+        String revString = sb.reverse().toString();
+
+        for(int i = 0; i < s.length(); i++){
+            for(int j = i + 1; j < s.length() + 1; j++){
+                String curString = s.substring(i, j);
+                if(revString.contains(curString) & isPalindrome(curString) & curString.length() > curMaxPalindrome.length()){
+                    curMaxPalindrome = curString;
                 }
             }
         }
-        
+
         return curMaxPalindrome;
+
     }
 
     public boolean isPalindrome(String aWord)
@@ -59,8 +60,8 @@ class OtherSolution {
 
     public static void main(String [] args)
     {
-        OtherSolution solObj = new OtherSolution();
-        String word = "";
+        OtherSolutionG solObj = new OtherSolutionG();
+        String word = "aacdefcaa";
         
         String ans = solObj.longestPalindrome(word);
         System.out.println(ans + " is the longest Palindrome in " + word);
