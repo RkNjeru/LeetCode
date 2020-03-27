@@ -8,19 +8,19 @@
 
 class OtherSolutionG {
     public String longestPalindrome(String s) {
-        if(s.length() == 0){
+        if (s.length() == 0) {
             return "";
         }
 
-        String curMaxPalindrome = s.substring(0,1);
+        String curMaxPalindrome = s.substring(0, 1);
         StringBuilder sb = new StringBuilder(s);
 
         String revString = sb.reverse().toString();
 
-        for(int i = 0; i < s.length(); i++){
-            for(int j = i + 1; j < s.length() + 1; j++){
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 1; j < s.length() + 1; j++) {
                 String curString = s.substring(i, j);
-                if(revString.contains(curString) & isPalindrome(curString) & curString.length() > curMaxPalindrome.length()){
+                if (revString.contains(curString) & isPalindrome(curString) & curString.length() > curMaxPalindrome.length()) {
                     curMaxPalindrome = curString;
                 }
             }
@@ -30,39 +30,33 @@ class OtherSolutionG {
 
     }
 
-    public boolean isPalindrome(String aWord)
-    {
+    public boolean isPalindrome(String aWord) {
         int strLen = aWord.length();
         boolean ans = false;
-        
-        int stopIndex = (strLen%2 == 0) ? strLen/2 : strLen/2 + 1;
+
+        int stopIndex = (strLen % 2 == 0) ? strLen / 2 : strLen / 2 + 1;
         int frontIndex = 0;
         int backIndex = strLen - 1;
 
-        while(backIndex >= stopIndex)
-        {
-            if(aWord.charAt(frontIndex) == aWord.charAt(backIndex))
-            {
+        while (backIndex >= stopIndex) {
+            if (aWord.charAt(frontIndex) == aWord.charAt(backIndex)) {
                 frontIndex++;
                 backIndex--;
                 ans = true;
                 continue;
-            }
-            else
-            {
+            } else {
                 ans = false;
                 break;
             }
         }
-        
+
         return ans;
     }
 
-    public static void main(String [] args)
-    {
+    public static void main(String[] args) {
         OtherSolutionG solObj = new OtherSolutionG();
         String word = "aacdefcaa";
-        
+
         String ans = solObj.longestPalindrome(word);
         System.out.println(ans + " is the longest Palindrome in " + word);
     }
