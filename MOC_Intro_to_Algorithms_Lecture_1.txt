@@ -1,0 +1,64 @@
+-- MOC Intro to Algorithms Lecture 1 
+
+efficiency and scalability
+classic data structures
+BST, hash tables, (dictonaries in python), balanced BST
+
+content:
+    8 modules:
+        algorithmic thinking: peak finding
+        sorting & trees: event simulation 
+        hashing: genome comparison 
+        numerics: rsa encryption (used in SSL)
+        graphs: rubik's cube (2*2*2)
+        shortest paths: caltech->MIT
+        dynamic programming: image compression 
+        advanced topics
+
+peak finder
+
+one-dimensional version:
+    {a, b, c, d, e, f, g, h, i}
+    {1, 2, 3, 4, 5, 6, 7, 8, 9}
+    a-i are numbers 
+    find peak:
+        position 2 is a peak if and only if b>=a and b>=c
+        position 9 is a peak iff i>=h
+    problem:
+        find a peak if it exists
+    straightforward algorithm:
+        start from left and walks across
+    logarithmic algorithm:
+        examine beginning with n/2 and adjecent values
+        recursively solve problem with this approach
+        O(log(n))
+
+two-dimensional version:
+    n rows * m columns
+    {_, c, _, _}
+    {b, a, d, _}
+    {_, e, _, _}
+    {_, _, _, _}
+    a is a 2D peak iff a>=b, a>=d, a>=c, a>=e
+    greedy ascent algorithm:
+        picks a direction and tries to follow direction in order to find peak
+        have to make choice of where to start and direction to move
+        default traverse directions 
+        worst case O(nm) complexity
+            if n=m: O(n^2) complexity
+    Example:
+        {__, __, __, __}
+        {14, 13, 12, __}
+        {15, _9, 11, 17}
+        {16, 17, 19, 20}
+    
+    attempt #2:
+        pick middle column j=m/2
+        find global max on column j at (i,j)
+        compare (i, j-1), (i, j), (i, j+1)
+        pick left columns if (i, j-1) > (i, j) similarly for right 
+        when you have a single col, find the global max := done
+        T(n, m) = T(n, m/2) + O(n)
+        T(n, 1) = O(n)
+        T(n, m) = O(n) + ... + O(n) = O(nlog(m))
+
