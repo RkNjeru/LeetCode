@@ -1,0 +1,65 @@
+Data Structures and Algorithms
+
+-- Java string to char array
+char[] chars = s.toCharArray();
+
+https://www.geeksforgeeks.org/amazon-interview-experience-3years-experience-sde-ii/?ref=rp
+
+https://sites.google.com/site/steveyegge2/five-essential-phone-screen-questions
+
+Familiarize with and solve well-know problems
+
+1. write a method that prints the contents of a tree using depth-first search
+
+2. Find the balancing point of an array. 
+    At which element does the sum of left elements
+    equals sum of right elements
+
+3. Refresher on recursion
+
+1) Coding. The candidate has to write some simple code, with correct syntax, in C, C++, or Java.
+
+2) OO design. The candidate has to define basic OO concepts, and come up with classes to model a simple problem.
+
+3) Scripting and regexes. The candidate has to describe how to find the phone numbers in 50,000 HTML pages.
+
+4) Data structures. The candidate has to demonstrate basic knowledge of the most common data structures.
+
+5) Bits and bytes. The candidate has to answer simple questions about bits, bytes, and binary numbers.
+
+Binary Tree
+    manipulation
+    trees are not linear like array or linked lists
+    traversal
+        traversal means read/processing the data of a node exactly one in some order in a tree
+        time complexity of all traversal is O(n) since all nodes are visisted once
+        https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/        
+        breadths first
+            also known as level order
+            level by level    
+        depth first
+              Preorder: 
+                   <root><left><right>
+                                 Inorder
+                  <left><root><right>
+              Postorder
+                  <left><right><root>
+              
+              
+Hash Tables 
+    collision handling
+
+Hashmaps
+
+B+ trees
+
+Caches
+
+
+Linked lists
+    doubly linked list
+    Program for n’th node from the end of a Linked List
+
+Sorting Algorithms
+
+
