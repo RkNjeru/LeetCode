@@ -1,10 +1,11 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 // https://leetcode.com/problems/bulls-and-cows/
 class BullsCowsSolution{
 
-    public String getHint(String secret, String guess) {
+    public String getHintOld(String secret, String guess) {
         String ans = "val";
         String jVal;
         int mBulls = 0, mCows = 0;
@@ -55,6 +56,46 @@ class BullsCowsSolution{
         }
 
         return mBulls + "A" + mCows + "B";
+    }
+
+    public String getHint(String secret, String guess) {
+        HashMap < Character, Integer > a = new HashMap < Character, Integer > ();
+        HashMap < Character, Integer > b = new HashMap < Character, Integer > ();
+        int bulls = 0;
+        for (int i = 0; i < secret.length(); i++) {
+            if (secret.charAt(i) == guess.charAt(i)) {
+                bulls++;
+            } else {
+                if (a.containsKey(secret.charAt(i))) {
+                    int temp = a.get(secret.charAt(i));
+                    temp++;
+                    a.put(secret.charAt(i), temp);
+                } else if (a.containsKey(secret.charAt(i)) == false) {
+                    a.put(secret.charAt(i), 1);
+                }
+                if (b.containsKey(guess.charAt(i))) {
+                    int temp = b.get(guess.charAt(i));
+                    temp++;
+                    b.put(guess.charAt(i), temp);
+                } else if (b.containsKey(guess.charAt(i)) == false) {
+                    b.put(guess.charAt(i), 1);
+                }
+            }
+        }
+        Set < Character > e = b.keySet();
+        int cows = 0;
+        for (char i: e) {
+            if (a.containsKey(i)) {
+                int tg = a.get(i);
+                int mg = b.get(i);
+                if (tg > mg) {
+                    cows = cows + mg;
+                } else {
+                    cows = cows + tg;
+                }
+            }
+        }
+        return Integer.toString(bulls) + 'A' + Integer.toString(cows) + 'B';
     }
 
     public static void main(String[] args){
