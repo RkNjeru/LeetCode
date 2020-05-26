@@ -149,7 +149,7 @@
 243. Shortest Word Distance    
 13. Roman to Integer    
 256. Paint House    
-101. Symmetric Tree    
+101. Symmetric Tree ***  
 53. Maximum Subarray    
 671. Second Minimum Node In a Binary Tree    
 716. Max Stack    
