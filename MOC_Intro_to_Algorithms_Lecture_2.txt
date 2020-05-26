@@ -1,0 +1,56 @@
+-- MOC Intro to Algorithms Lecture 2 
+-- lg signifies log base 2 
+
+model of computation specifies: 
+    - what operations an algorithm is allowed
+    - cost (time, space, ...) of each operation
+
+1. Random Access Machine (RAM)
+    - Random Access Memory modeled by big array
+    - RAM is usually organized by words and addresses: 0 <--> len()
+    - in O(1) (constant) time, can:
+        - load 0(1) word (constant number of words) from Memory
+        - do constant, O(1), number of compuations on them
+        - store, write out, words 
+    - a word is: <w> words 
+
+2. Pointer Machine: 
+    - Dynamically allocated objects 
+    - an object has a constant number of fields
+    - a field is either a word (e.g int) or a pointer
+    - a pointer points to an object or is null 
+
+Python model: 
+    - 'list' in python is an array 
+    - pointer machine can be implemented with an object with 
+        O(1) attributes (constant ~ small)
+    - L.append(x) 
+        - table doubling (lecture doubling)
+        - O(1) time 
+    - L = L1 + L2 
+    - L.sort() -> O(nLog(n)) Lecture 3 
+    - dictionary -> dict in python 
+        - D[key] = val --> O(1) Lectures 8-10
+        - constant time operations (with high probability w.h.p)
+    - long: Lecture 11
+        - x + y (|x| |y|) 
+            - O(|x| + |y|)
+        - x * y
+            - O((|x| + |y|) ^ lg3)
+    - heapq: Lecture 4
+
+Document distance problem: 
+    - two documents, D1 and D2
+    - compute distance b/w them 
+    - d(D1, D2) 
+    - a document is a sequence of words 
+    - a word is a string of alphanumeric characters a-z, 0-9
+    - idea: shared words
+    - think of document as verctor
+    - D[w] = # of occurrences of w in D 
+    - D1 = "the cat"
+    - D2 = "the dog" 
+    - Algorithm: 
+        1. Split the document into words
+        2. compute word frequencies
+        3. dot product
