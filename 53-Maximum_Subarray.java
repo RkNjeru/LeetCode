@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 class MaxSubArraySolution{
     public int maxSubArray(int[] nums){
         int largSum = nums[0];
