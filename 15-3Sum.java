@@ -8,49 +8,35 @@ import java.util.List;
 class ThreeSumSolution{
     public List<List<Integer>> threeSum(int[] nums){
         Arrays.sort(nums);
-
         List<List<Integer>> mAns = new ArrayList<>();
         HashSet<String> found = new HashSet<String>();
-
+        
         for(int i = 0; i < nums.length; i++){
             int iVal = nums[i];
 
-            if(iVal > 0){
-                return mAns;
-            }
+            if(iVal > 0) {break;}
 
-            for(int j = nums.length - 1; j > i + 1; j--){
-                int jVal = nums[j];
+            int low = i + 1;
+            int high = nums.length - 1;
 
-                if(iVal + jVal + jVal < 0) { 
-                    continue;
+            while(low < high && (i == 0 || nums[i -1] != nums[i])){
+                int curSum = iVal + nums[low] + nums[high];
+                if(curSum < 0 || (low > i + 1 && nums[low] == nums[low - 1])){
+                    low++;
                 }
-
-                for(int k = j - 1; k > i; k--){
-                    int kVal = nums[k];
-                    
-                    if( (iVal + jVal + kVal) == 0){
-                        // StringBuilder tempStr = new StringBuilder();
-                        // String theStr = Integer.toString(iVal) + Integer.toString(jVal) + Integer.toString(kVal);
-                        
-                        // if(!found.contains(theStr)){
-                        //     found.add(theStr);
-                        //     Integer[] temp = new Integer[] {iVal, jVal, kVal};
-                        //     List<Integer> tempList = Arrays.asList(temp);
-                        //     mAns.add(tempList);
-                        // }
-                        if(found.add(Integer.toString(iVal) + Integer.toString(jVal) + Integer.toString(kVal))){
-                            Integer[] temp = new Integer[] {iVal, jVal, kVal};
-                            List<Integer> tempList = Arrays.asList(temp);
-                            mAns.add(tempList);
-                        }
-
-                        
-                    }
-
+                else if(curSum > 0 || ((high < nums.length - 1) && nums[high] == nums[high + 1])){
+                    high--;
+                }
+                else{
+                    Integer[] temp = new Integer[] {iVal, nums[low], nums[high]};
+                    List<Integer> tempList = Arrays.asList(temp);
+                    mAns.add(tempList);
+                    high--;
+                    low++;
                 }
             }
         }
+
         return mAns;
     }
 
