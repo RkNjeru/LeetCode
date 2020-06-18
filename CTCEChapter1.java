@@ -42,11 +42,43 @@ class CTCEChapter1 {
         return true;
     }
 
+    // 1.3 URLify: Write a method to replace all spaces in a string w/ '%20'
+
+    public String replaceSpaces(String paddedStr){
+        char[] strArray = paddedStr.toCharArray();
+        int begWritePointer = paddedStr.length() - 1, endWritePointer = begWritePointer, lastWrotePointer = endWritePointer;
+        boolean urlify = false;
+        boolean foundFirst = false;
+        while(begWritePointer >= 0){
+            urlify = false;
+            char curChar = strArray[begWritePointer];
+
+            if(curChar == ' '){
+                begWritePointer--;
+                urlify = true;
+            }
+            else if(curChar != ' '){
+                foundFirst = true;
+                strArray[lastWrotePointer--] = curChar;
+                begWritePointer--;
+            }
+
+            if(urlify && foundFirst){
+                strArray[lastWrotePointer--] = '0';
+                strArray[lastWrotePointer--] = '2';
+                strArray[lastWrotePointer--] = '%';
+            }
+        }
+
+        return new String(strArray);
+    }
+
     public static void main(String[] args){
         CTCEChapter1 classObj = new CTCEChapter1();
         // System.out.println(classObj.isUniqueChars("Test"));
         // System.out.println(classObj.isUniqueChars("test"));
-        System.out.println(classObj.isPermutation("god   ", "dog"));
-        System.out.println(classObj.isPermutation("Dog", "goD"));
+        // System.out.println(classObj.isPermutation("god   ", "dog"));
+        // System.out.println(classObj.isPermutation("Dog", "goD"));
+        System.out.println(classObj.replaceSpaces("Mr John Smith    "));
     }
 }
