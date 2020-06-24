@@ -2,42 +2,20 @@ class ValidateBSTSolution{
 
     public boolean isValidBST(TreeNode root){
 
-        return validate(root, Integer.MAX_VALUE, Integer.MIN_VALUE);
+        return validate(root, null, null);
 
     }
 
     public boolean validate(TreeNode root, Integer max, Integer min){
 
-        if(root == null || (root.left == null && root.right == null)){
+        if(root == null){
             return true;
         }
-        
-        else if(root.left == null && root.right != null){
-            if(root.val < root.right.val && (root.right.val < max || root.right.val == Integer.MAX_VALUE)){
-                return validate(root.right, max, root.val > min ? root.val : min);
-            }
-            else{
-                return false;
-            }  
-
-        }
-        else if(root.left != null && root.right == null){
-            if(root.val > root.left.val && (root.left.val > min || root.left.val == Integer.MIN_VALUE)){
-                return validate(root.left, root.val < max ? root.val : max, min);
-            }
-            else{
-                return false;
-            }
-            
+        else if(max != null && root.val >= max || min != null && root.val <= min){
+            return false;
         }
         else{
-            if((root.val > root.left.val && (root.left.val > min || root.left.val == Integer.MIN_VALUE)) && (root.val < root.right.val && (root.right.val < max || root.right.val == Integer.MAX_VALUE))){
-                return validate(root.left, root.val < max ? root.val : max, min) && validate(root.right, max, root.val > min ? root.val : min);    
-            }
-            else{
-                return false;
-            }
-            
+            return validate(root.left, root.val, min) && validate(root.right, max, root.val);
         }
 
     }
@@ -83,7 +61,7 @@ class ValidateBSTSolution{
         ex73.right.left = classObj.new TreeNode(Integer.MIN_VALUE);
         ex73.right.right = classObj.new TreeNode(20);
 
-        boolean ans = classObj.isValidBST(ex73);
+        boolean ans = classObj.isValidBST(ex70C);
         System.out.println(ans);
     }
 
