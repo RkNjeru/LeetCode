@@ -1,24 +1,20 @@
 class HIndexIISolution{
     public int hIndex(int[] citations){
 
-        int low = 0, high = citations.length - 1, med = 0;
-        int nMore, hTemp = 0, nLess;
+        int n = citations.length;
+        int low = 0, high = n - 1, mid = 0;
 
-        while(low < high){
-            med = (low + high) / 2;
-            nMore = citations.length - med;
-            if(citations[med] == nMore){
-                return citations[med];
+        while(low <= high){
+            mid = low + (high - low) / 2;
+            if(citations[mid] < n - mid){
+                low = mid + 1;
             }
-            else if(citations[med] > nMore){
-                high = med - 1;
-            }
-            else if(citations[med] < nMore){
-                low = med - 1;
+            else{
+                high = mid - 1;
             }
         }
     
-        return citations.length;
+        return n - low;
     }
     public static void main(String[] args){
         HIndexIISolution classObj = new HIndexIISolution();
