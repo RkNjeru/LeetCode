@@ -3,30 +3,13 @@ class SearchRotatedArraySolution{
     public int search(int[] nums, int target) {
         int low = 0, high = nums.length - 1, mid = 0;
 
-        while(low <= high){
-            mid = low + ((high - low) / 2);
-            if(nums[mid] == target){
-                return mid;
-            }
+        // explanation: https://www.youtube.com/watch?v=QdVrY3stDD4
+        
+        // 1. find pivot (smallest element)
 
-            if(target > nums[mid] && target <= nums[high]){
-                low = mid + 1;
-            }
-            else if(target >= nums[low] && target < nums[mid]){
-                high = mid - 1;
-            }
-            // sus
-            else if(target <= nums[high]){
-                low = mid + 1;
-            }
-            else if(target >= nums[low]){
-                high = mid - 1;
-            }
-            else{
-                return -1;
-            }
+        // 2. determine which side of pivot target exists
 
-        }
+        // 3. binary search on know correct portion of array
 
         return -1;
     }
