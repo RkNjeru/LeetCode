@@ -1,64 +1,65 @@
-import java.math.BigInteger;
 import java.util.Arrays;
 
 class KokoSolution{
     public int minEatingSpeed(int[] piles, int H) {
-        
-        // non-optimal solution:
-
-        // sort piles array
 
         Arrays.sort(piles);
 
-        int sum = 0, rate, index = 0, curVal, hours = 0;
-        boolean found = false;
-        
-        // find sum
-        for(int num : piles){
-            sum += num;
+        int[] kSearch = new int[piles[piles.length - 1]];
+
+        for(int i = 0; i < kSearch.length; i++){
+            kSearch[i] = i + 1;
         }
 
-        // find sum/hours
-        // use average as starting point
-        rate = sum % H == 0 ? sum / H : (sum / H) + 1;
+        int low = 0, high = kSearch.length - 1, mid = 0, pilesIndex = 0, hours = 0, curVal = 0;
 
-        curVal = piles[index];
+        while(low <= high){
+            // try the current k (mid) (rate)
+            mid = kSearch[low + ((high - low) / 2)];
+            hours = H;
+            pilesIndex = 0;
+            curVal = piles[pilesIndex];
 
-        // find first possible rate (will be minimum)
-        while(!found){
-            if(index == 0){hours = H;}
+            while(pilesIndex < piles.length){
+                hours--;
+                curVal -= mid;
 
-            // curVal = piles[index];
-
-            curVal -= rate;
-            hours--;
-
-            if(index == piles.length - 1 && curVal <= 0){
-                found = true;
-                return rate;
+                if(pilesIndex == piles.length - 1 && curVal < 1){
+                    pilesIndex++;
+                    high = mid;
+                }
+                else if(hours < 1){
+                    low = mid + 1;
+                    break;
+                }
+                else if(pilesIndex == piles.length - 1){
+                    continue;
+                }
+                else if(curVal < 1){
+                    pilesIndex++;
+                    curVal = piles[pilesIndex];
+                }
+                else{
+                    continue;
+                }
             }
-            else if(hours <= 0){
-                rate += 1;
-                index = 0;
+
+            if(hours > 0){
+                high = mid - 1;
             }
-            else if(index == piles.length - 1 && hours >= 0){
-                continue;
+            else if(curVal == 0){
+                return mid;
             }
-            else if(curVal <= 0 && index < piles.length - 1){
-                index++;
-                curVal = piles[index];
-            }
-            else if(curVal > 0 && index < piles.length - 1){
-                continue;
+            else if (curVal > 0 ){
+                low = mid + 1;
             }
             else{
-                rate += 1;
-                index = 0;
+                high = mid - 1;
             }
+
         }
 
-
-        return rate;
+        return mid;
     }
     
     public static void main(String[] args){
@@ -71,6 +72,6 @@ class KokoSolution{
         int h3 = 6;
         int[] ex4 = {332484035,524908576,855865114,632922376,222257295,690155293,112677673,679580077,337406589,290818316,877337160,901728858,679284947,688210097,692137887,718203285,629455728,941802184};
         int h4 = 823855818;
-        System.out.println(classObj.minEatingSpeed(ex4, h4));
+        System.out.println(classObj.minEatingSpeed(ex1, h1));
     }
 }
