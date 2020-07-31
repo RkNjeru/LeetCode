@@ -3,59 +3,84 @@ import java.util.HashMap;
 import java.util.Map;
 
 class LRUCache {
-    
-    private HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
 
-    // usage tracker
-    private HashMap<Integer, Date> usage = new HashMap<Integer, Date>();
-
-    private int mCapacity; 
-
-    public LRUCache(int capacity) {
-        mCapacity = capacity;        
+    class Node{
+        int key;
+        int val;
+        Node prev;
+        Node next;
     }
 
-    public int get(int key) {
-        if(map.containsKey(key)){
+    // add to front
+    public void add(Node aNode){
 
-            // if(usage.containsKey(key)){
-            //     usage.put(key, usage.get(key) + 1);
-            // }
-            // else{
-            //     usage.put(key, 1);
-            // }
-            Date date = new Date();
-            usage.put(key, date.);
-            return map.get(key);
+        Node head_next = head.next;
+
+        aNode.prev = head;
+        head.next = aNode;
+        aNode.next = head_next;
+        head_next.prev = aNode;
+
+    }
+
+    // remove from end 
+    public void remove(Node aNode){
+        Node next_node = aNode.next;
+        Node prev_node = aNode.prev;
+
+        next_node.prev = prev_node;
+        prev_node.next = next_node;
+         
+
+    }
+
+    final Node head = new Node();
+    final Node tail = new Node();
+    Map<Integer, Node> node_map;
+    int cache_capacity; 
+
+    public LRUCache(int capacity) {
+        node_map = new HashMap<>(capacity);
+        this.cache_capacity = capacity;
+        head.next = tail;
+        tail.prev = head;
+        
+    }
+    
+    public int get(int key) {
+
+        if(node_map.containsKey(key)){
+            remove(node_map.get(key));
+            add(node_map.get(key));
+            return node_map.get(key).val;
         }
         else{
             return -1;
         }
-        // increment use
+           
     }
     
     public void put(int key, int value) {
-        int curCap = map.size(), leastKey = Integer.MAX_VALUE, leastValue = Integer.MAX_VALUE;
-        // if at mCapacity, remove least recently used item
-        if(curCap == mCapacity){
-            for(Map.Entry<Integer, Integer> entry : usage.entrySet()){
-                if(entry.getValue() < leastValue){
-                    leastValue = entry.getValue();
-                    leastKey = entry.getKey();
-                }
-            }
-            map.remove(leastKey);
-            usage.remove(leastKey);
 
-            usage.put(key, 0);
-            map.put(key, value);
-
+        Node node = node_map.get(key);
+        if(node != null){
+            remove(node);
+            node.val = value;
+            add(node);
         }
         else{
-            usage.put(key, 0);
-            map.put(key, value);
-        }
+            if(node_map.size() == cache_capacity){
+                node_map.remove(tail.prev.key);
+                remove(tail.prev);
+            }
 
+            Node new_node = new Node();
+            new_node.key = key;
+            new_node.val = value;
+
+            node_map.put(key, new_node);
+            add(new_node);
+        }
         
     }
 
