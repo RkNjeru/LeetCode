@@ -1,3 +1,10 @@
+MSFT:
+Tree traversal
+Heap
+Search algorithms
+Binary search
+
+
 Binary Search:
 https://leetcode.com/list/xcrx4mxm/
 https://www.youtube.com/watch?v=GU7DpgHINWQ
