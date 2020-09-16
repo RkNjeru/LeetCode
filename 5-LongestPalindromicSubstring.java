@@ -8,46 +8,64 @@
 
 class OtherSolution {
     public String longestPalindrome(String s) {
-        if (s.length() == 0) {
-            return "";
-        }
-
-        String curMaxPalindrome = s.substring(0, 1);
-
-        //traverse through the string with indexing at each letter
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = i + 1; j <= s.length(); j++) {
-                String currentWord = s.substring(i, j);
-                if (isPalindrome(currentWord) & currentWord.length() > curMaxPalindrome.length()) {
-                    curMaxPalindrome = currentWord;
-                }
+        int maxLength = 0;
+        String maxPal = "";
+        
+        for(int i = 0; i < s.length(); i++){
+            
+            Pair<Integer, String> pairOdd = longest(s, i, i + 1);
+            
+            if(pairOdd.getKey() > maxLength){
+                maxLength = pairOdd.getKey();
+                maxPal = pairOdd.getValue();
+            }
+            
+            Pair<Integer, String> pairEven = longest(s, i , i);
+            
+            if(pairEven.getKey() > maxLength){
+                maxLength = pairEven.getKey();
+                maxPal = pairEven.getValue();
             }
         }
-
-        return curMaxPalindrome;
+        
+        return maxPal;
+        
     }
+    
+    public Pair<Integer, String> longest(String str, int beg, int end){
+        
+        int thisMax = 0;
+        String thisStr = "";
+        
+        String temp = str.substring(beg, end);
 
-    public boolean isPalindrome(String aWord) {
-        int strLen = aWord.length();
-        boolean ans = false;
+        while(beg >= 0 && end <= str.length() && isPalindrome(temp)){
+            if(temp.length() > thisMax){
+                thisMax = temp.length();
+                thisStr = temp;
+            }
+            beg--;
+            end++;
+            if(beg < 0 || end > str.length()){break;}
+            temp = str.substring(beg, end);
 
-        int stopIndex = (strLen % 2 == 0) ? strLen / 2 : strLen / 2 + 1;
-        int frontIndex = 0;
-        int backIndex = strLen - 1;
-
-        while (backIndex >= stopIndex) {
-            if (aWord.charAt(frontIndex) == aWord.charAt(backIndex)) {
-                frontIndex++;
-                backIndex--;
-                ans = true;
+        }
+        
+        return new Pair(thisMax, thisStr);
+    }
+    
+    public boolean isPalindrome(String s){
+        if(s == null || s.length() == 0){return true;}
+        for(int i = 0; i <= (s.length() - 1 ) / 2; i++){
+            if(s.charAt(i) == s.charAt(s.length() - 1 - i)){
                 continue;
-            } else {
-                ans = false;
-                break;
+            }
+            else{
+                return false;
             }
         }
-
-        return ans;
+        
+        return true;
     }
 
     public static void main(String[] args) {

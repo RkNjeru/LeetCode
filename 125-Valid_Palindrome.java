@@ -1,42 +1,40 @@
-class ValidPalinSolution{
-
+class Solution {
     public boolean isPalindrome(String s) {
-        s = s.toLowerCase();
-        int low = 0, high = s.length() - 1, uBound = s.length() - 1;
+        if(s == null){return false;}
         
-        while(low <= high){
-            while(!isAlpha(s.charAt(low))){
-                low++;
-                if(low > uBound){return false;}
+        s = s.trim();
+        s = s.toLowerCase();
+        
+        if(s.length() == 0){return true;}
+        
+        int begIndex = 0, endIndex = s.length() - 1;
+        
+        while(begIndex <= endIndex){
+            while(begIndex < s.length() - 1 && !isAlpha(s.charAt(begIndex))){
+                begIndex++;
             }
-            while(!isAlpha(s.charAt(high))){
-                high--;
-                if(high < 0){return false;}
+            while(endIndex > 0 && !isAlpha(s.charAt(endIndex))){
+                endIndex--;
             }
-            if(s.charAt(low) == s.charAt(high)){
-                low++;
-                high--;
+            
+            if((!isAlpha(s.charAt(begIndex)) && !isAlpha(s.charAt(endIndex))) || (s.charAt(begIndex) == s.charAt(endIndex))){
+                begIndex++;
+                endIndex--;
             }
             else{
                 return false;
             }
         }
+        
         return true;
         
     }
     
-    
     public boolean isAlpha(char c){
-        if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')){
+        if((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')){
             return true;
         }
-        else{
-            return false;
-        }
-    }
+        else{return false;}
 
-    public static void main(String[] args){
-        ValidPalinSolution classObj = new ValidPalinSolution();
-        System.out.println(classObj.isPalindrome(" "));
     }
 }
